@@ -1,0 +1,66 @@
+name: Verify and release
+on:
+  push:
+    branches: [main]
+    tags: ['v0.2.*']
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install graphics runtime
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libgl1 xvfb xauth libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-keysyms1 libxcb-shape0 libxcb-xinerama0
+      - run: python -m pip install -e . build
+      - run: python -m unittest discover -s tests -v
+      - name: Native X11 geometry and click-through integration
+        if: runner.os == 'Linux'
+        run: xvfb-run -a env AURORA_X11_INTEGRATION=1 QT_QPA_PLATFORM=xcb python -m unittest discover -s tests -p test_x11_integration.py -v
+      - run: python -m aurora_boot.app --smoke-test
+      - run: python -m aurora_boot.app --render preview.png --theme aurora
+      - uses: actions/upload-artifact@v4
+        with:
+          name: preview-${{ runner.os }}
+          path: preview.png
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v0.2.')
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build
+      - run: python -m build
+      - name: Verify wheel and source contents
+        run: python tests/check_packages.py
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          (cd dist && sha256sum *.whl *.tar.gz > SHA256SUMS)
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            echo "Release already exists. Use Publish verified tag for an explicit refresh."
+            exit 0
+          fi
+          gh release create "$GITHUB_REF_NAME" dist/*.whl dist/*.tar.gz dist/SHA256SUMS --verify-tag --title "Aurora Boot $GITHUB_REF_NAME" --notes-file RELEASE_NOTES.md
