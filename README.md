@@ -1,22 +1,72 @@
+<div align="center">
+
 # AgentSplash Bot
 
-**Bring your AI agent workspace to life.**
+### Your AI workspace, with an entrance.
 
-Animated splash screens and translucent backgrounds for AI agent desktop apps, including Claude, ChatGPT, and Codex. Supports Windows, macOS, and Linux X11.
+Animated splash screens and translucent backgrounds for AI agent desktop apps,<br>including **Claude, ChatGPT, and Codex**.
 
-Built with Python and Qt, AgentSplash Bot adds real-time aurora, ember, and orbital effects to matching application windows, with controls in your system tray.
+<p>
+<a href="https://github.com/ShuaixinHuang/agent-splash-bot/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/ShuaixinHuang/agent-splash-bot?style=flat-square&amp;color=9b87f5"></a> <img alt="Python 3.10 or later" src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=flat-square&amp;logo=python&amp;logoColor=white"> <a href="LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/License-Unlicense-8bd5ca?style=flat-square"></a>
+</p>
 
-**Python 3.10+** · **Windows / macOS / Linux X11** · **Unlicense**
+**Windows · macOS · Linux X11**
 
-[Watch demos](#demo-videos) · [Quick start](#quick-start) · [Features](#features) · [Platform support](#platform-support) · [Usage](#usage) · [Development](#development)
+[**Download v0.2.0**](https://github.com/ShuaixinHuang/agent-splash-bot/releases/tag/v0.2.0) &nbsp; · &nbsp; [Get started](#quick-start) &nbsp; · &nbsp; [Showcase](#showcase) &nbsp; · &nbsp; [Features](#features)
 
-## Demo videos
+</div>
 
-See AgentSplash Bot in action. Each link opens the corresponding video on GitHub.
+<p align="center">
+  <img src="docs/media/showcase.gif" alt="Animated showcase of agent splash screens and translucent window backgrounds" width="900">
+</p>
 
-| Demo 1 | Demo 2 | Demo 3 |
+<p align="center"><sub>Real footage. Inline animated previews. Three different moods for your agent workspace.</sub></p>
+
+## Showcase
+
+<table>
+  <tr>
+    <th width="33%">01 · Warm amber</th>
+    <th width="33%">02 · Electric violet</th>
+    <th width="33%">03 · Celestial wings</th>
+  </tr>
+  <tr>
+    <td><img src="docs/media/demo-1.gif" alt="Warm amber character splash animation" width="280"></td>
+    <td><img src="docs/media/demo-2.gif" alt="Electric violet character splash animation" width="280"></td>
+    <td><img src="docs/media/demo-3.gif" alt="Celestial wings character splash animation" width="280"></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/1.mp4">Full recording · MP4</a></td>
+    <td align="center"><a href="https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/2.mp4">Full recording · MP4</a></td>
+    <td align="center"><a href="https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/3.mp4">Full recording · MP4</a></td>
+  </tr>
+</table>
+
+The previews above loop automatically. Open a full recording for the original resolution and any included audio.
+
+> **Showcase and release:** These maintainer-provided recordings show character-based visual concepts. The v0.2.0 Python package renders procedural Aurora, Ember, and Orbit effects; character artwork, video, and audio are not bundled with the application.
+
+## Features
+
+| Make an entrance | Keep your workflow |
+| --- | --- |
+| **Three real-time themes** — Aurora, Ember, and Orbit, drawn with Python and Qt. | **Click-through overlays** — keep using the application beneath the animation. |
+| **A short intro, then a background** — tune duration, opacity, and frame rate. | **Window tracking** — show effects on matching foreground apps and hide them when you switch away. |
+| **Preview and replay** — try a theme on its own or replay it from the tray. | **One intro per window** — avoid repeated intros when switching back during a session. |
+| **PNG export** — save a rendered frame directly from the command line. | **On-demand rendering** — pause the animation timer while hidden; 30 FPS by default. |
+
+### Built-in themes
+
+| Aurora | Ember | Orbit |
 | :---: | :---: | :---: |
-| [▶ Watch video](https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/1.mp4) | [▶ Watch video](https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/2.mp4) | [▶ Watch video](https://github.com/ShuaixinHuang/agent-splash-bot/blob/main/3.mp4) |
+| Flowing aurora effects | Glowing ember particles | Orbital star trails |
+| `--theme aurora` | `--theme ember` | `--theme orbit` |
+
+### How it works
+
+1. **Launch** AgentSplash Bot from your virtual environment.
+2. **Match** your agent application's process name or window identity.
+3. **Enjoy** the intro and optional translucent background; adjust or pause them from the tray.
 
 ## Quick start
 
@@ -53,26 +103,6 @@ Linux requires the Qt graphics runtime libraries. Debian / Ubuntu X11 installati
 If Qt reports missing `xcb` platform plugin dependencies, install the required libraries through your system package manager. PNG rendering with `--render` can use Qt's offscreen mode.
 
 </details>
-
-## Features
-
-| Feature | What it does |
-| --- | --- |
-| Three procedural themes | Aurora, Ember, and Orbit effects rendered in real time, without downloading video, audio, or font assets. |
-| Window tracking | Matches the active application and displays animation over its content area; hides when you switch to another application. |
-| One intro per window | Remembers windows during the current session to avoid replaying the intro on every switch. Replay is available from the tray. |
-| Click-through overlays | Keeps the underlying application accessible to mouse input. |
-| Tray controls | Adjust application matching, theme, intro duration, background opacity, frame rate, and pause state. |
-| Protected configuration | Validates settings, saves atomically, and backs up invalid configuration files before restoring defaults. |
-| On-demand rendering | Stops the animation timer while the overlay is hidden; runs at 30 FPS by default. |
-
-### Themes
-
-| Theme | Effect | CLI option |
-| --- | --- | --- |
-| Aurora | Flowing aurora effects | `--theme aurora` |
-| Ember | Glowing ember particles | `--theme ember` |
-| Orbit | Orbital star trails | `--theme orbit` |
 
 ## Platform support
 
