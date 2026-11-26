@@ -7,7 +7,7 @@
 Animated splash screens and translucent backgrounds for AI agent desktop apps,<br>including **Claude, ChatGPT, and Codex**.
 
 <p>
-<a href="https://github.com/ShuaixinHuang/agent-splash-bot/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/ShuaixinHuang/agent-splash-bot?style=flat-square&amp;color=9b87f5"></a> <img alt="Python 3.10 or later" src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=flat-square&amp;logo=python&amp;logoColor=white"> <a href="LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/License-Unlicense-8bd5ca?style=flat-square"></a>
+<a href="https://github.com/ShuaixinHuang/agent-splash-bot/releases/latest"><strong>Latest release</strong></a> <img alt="Python 3.10 or later" src="https://img.shields.io/badge/Python-3.10%2B-3776ab?style=flat-square&amp;logo=python&amp;logoColor=white"> <a href="LICENSE"><img alt="License: Unlicense" src="https://img.shields.io/badge/License-Unlicense-8bd5ca?style=flat-square"></a>
 </p>
 
 **Windows · macOS · Linux X11**
